@@ -3,7 +3,6 @@ import * as actionTypes from "../actions/actionTypes";
 const initialStateProducts = {
   isPending: "",
   products: [],
-  productsFetched: false,
   error: null,
   deleteError: null,
   addError: null,
@@ -12,6 +11,8 @@ const initialStateProducts = {
   addSuccess: null,
   editSuccess: null,
 };
+
+//No need to save new products array state after addition and edit because products will be requested from server each time the main page is visited
 
 const reducer = (state = initialStateProducts, action = {}) => {
   switch (action.type) {
@@ -35,7 +36,7 @@ const reducer = (state = initialStateProducts, action = {}) => {
     case actionTypes.ADD_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: [...state.products, action.product],
+        // products: [...state.products, action.product],
         addSuccess: "Product added successfully",
       };
     case actionTypes.ADD_PRODUCTS_FAILED:
@@ -44,13 +45,13 @@ const reducer = (state = initialStateProducts, action = {}) => {
         addError: action.error,
       };
     case actionTypes.EDIT_PRODUCTS_SUCCESS: {
-      const newData = state.products.map((product) => {
-        if (product.id === action.product.id) return action.product;
-        return product;
-      });
+      //   const newData = state.products.map((product) => {
+      //     if (product.id === action.product.id) return action.product;
+      //     return product;
+      //   });
       return {
         ...state,
-        products: newData,
+        // products: newData,
         editSuccess: "Product edited successfully",
       };
     }

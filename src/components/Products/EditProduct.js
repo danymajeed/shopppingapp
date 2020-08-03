@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -84,8 +85,8 @@ const EditProduct = (props) => {
       value: "",
       validation: {
         isRequired: true,
-        isInteger: true,
-        maxLength: 4,
+        // isInteger: true,
+        // maxLength: 4,
       },
       error: false,
       errorMessage: "",
@@ -106,6 +107,7 @@ const EditProduct = (props) => {
   const [isAddingNew, setIsAddingNew] = useState(true);
   const [formIsValid, setFormIsValid] = useState(false);
   const [productForm, setProductForm] = useState(initialState);
+  const [image, setImage] = useState();
 
   useEffect(() => {
     if (props.location.state !== undefined) {
@@ -147,14 +149,12 @@ const EditProduct = (props) => {
     }
   };
 
-  const [image, setImage] = useState();
-
   const selectImageHandler = (event) => {
     setImage(event.target.files[0]);
   };
 
   const inputChangedHandler = (event) => {
-    const inputIdentifier = event.target.id;
+    const inputIdentifier = event.target.name;
     const updatedproductForm = {
       ...productForm,
     };
@@ -199,6 +199,7 @@ const EditProduct = (props) => {
     if (isAddingNew) {
       props.addProduct(product, props.token);
       setFormIsValid(false);
+      setImage();
       setProductForm(initialState);
     } else {
       product.append("id", productForm.id.value);
@@ -269,7 +270,7 @@ const EditProduct = (props) => {
                   <InputLabel htmlFor="price">Price</InputLabel>
                   <Input
                     fullWidth
-                    id="price"
+                    name="price"
                     value={productForm.price.value}
                     onChange={inputChangedHandler}
                     error={productForm.price.error}
@@ -284,7 +285,6 @@ const EditProduct = (props) => {
                     name="ram"
                     label="RAM (GB)"
                     type="input"
-                    id="ram"
                     value={productForm.ram.value}
                     onChange={inputChangedHandler}
                     helperText={productForm.ram.errorMessage}
@@ -294,23 +294,26 @@ const EditProduct = (props) => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    name="storage"
+                    select
                     label="Storage (GB)"
-                    type="input"
-                    id="storage"
+                    name="storage"
                     value={productForm.storage.value}
                     onChange={inputChangedHandler}
-                    helperText={productForm.storage.errorMessage}
-                    error={productForm.storage.error}
-                  />
+                  >
+                    <MenuItem value="16">16 GB</MenuItem>
+                    <MenuItem value="32">32 GB</MenuItem>
+                    <MenuItem value="64">64 GB</MenuItem>
+                    <MenuItem value="128">128 GB</MenuItem>
+                    <MenuItem value="256">256 GB</MenuItem>
+                    <MenuItem value="512">512 GB</MenuItem>
+                  </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    name="screenSize"
                     label="Screen Size (INCHES)"
                     type="input"
-                    id="screenSize"
+                    name="screenSize"
                     value={productForm.screenSize.value}
                     onChange={inputChangedHandler}
                     helperText={productForm.screenSize.errorMessage}

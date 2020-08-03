@@ -29,9 +29,8 @@ export const requestProducts = () => {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
           dispatch(requestProductsFailed(error.response.statusText));
-        } else if ("response " + error.request) {
+        } else if (error.request) {
           dispatch(requestProductsFailed("Failed to fetch products"));
         }
       });
@@ -141,4 +140,23 @@ export const resetProductsSuccessAlerts = () => {
 };
 export const resetProductsFailedAlerts = () => {
   return { type: actionTypes.RESET_PRODUCTS_FAILED_ALERTS };
+};
+
+export const searchProducts = (data) => {
+  return (dispatch) => {
+    dispatch(requestProductsPending());
+    axiosInstance
+      .post("/api/products/search/", data)
+      .then((response) => {
+        dispatch(requestProductsSuccess(response.data));
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          dispatch(requestProductsFailed(error.response.statusText));
+        } else if (error.request) {
+          dispatch(requestProductsFailed("Failed to fetch products"));
+        }
+      });
+  };
 };

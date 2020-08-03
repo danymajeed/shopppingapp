@@ -1,7 +1,7 @@
 import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
-import { SnackbarContent } from "@material-ui/core";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 
 function SlideTransition(props) {
   return <Slide {...props} direction="left" />;

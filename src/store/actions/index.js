@@ -5,6 +5,7 @@ export {
   editProducts,
   resetProductsFailedAlerts,
   resetProductsSuccessAlerts,
+  searchProducts,
 } from "./productsActions";
 export {
   logout,

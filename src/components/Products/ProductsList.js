@@ -1,14 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import ProductCard from "./ProductCard";
 import Spinner from "../UI/Spinner";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+import Grid from "@material-ui/core/Grid";
 
 const ProductsList = (props) => {
   let fetchedProducts = <Spinner />;
@@ -25,8 +18,11 @@ const ProductsList = (props) => {
     });
   }
 
-  const classes = useStyles();
-  return <div className={classes.container}>{fetchedProducts}</div>;
+  return (
+    <Grid container justify="center">
+      {fetchedProducts}
+    </Grid>
+  );
 };
 
 export default ProductsList;

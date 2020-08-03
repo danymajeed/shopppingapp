@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    width: 300,
+    width: 275,
     height: "auto",
     margin: theme.spacing(3),
+    marginTop: theme.spacing(1),
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -21,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     margin: "auto",
-    height: "300px",
-    width: "300px",
+    height: "275px",
+    width: "275px",
   },
   content: {
     textAlign: "left",

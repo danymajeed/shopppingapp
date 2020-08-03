@@ -3,20 +3,21 @@ import ProductsList from "./ProductsList";
 import * as actions from "../../store/actions/index";
 import Spinner from "../UI/Spinner";
 import Dialog from "../UI/Dialog";
+import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import Snackbar from "../UI/Snackbar";
 import Search from "./Search/Search";
 
 const styles = makeStyles((theme) => ({
+  main: {
+    marginTop: 20,
+  },
   errorMessage: {
     display: "flex",
     justifyContent: "center",
     letterSpacing: ".1rem",
     textTransform: "uppercase",
-  },
-  products: {
-    marginTop: "40px",
   },
 }));
 
@@ -48,7 +49,7 @@ const Products = (props) => {
   };
 
   useEffect(() => {
-    if (!productsFetched) requestProducts();
+    requestProducts();
   }, [requestProducts, productsFetched]);
 
   const dialogConfirmedActionHandler = () => {
@@ -64,9 +65,11 @@ const Products = (props) => {
   let products = null;
   if (props.error)
     products = <h2 className={classes.errorMessage}>{props.error}</h2>;
-  if (props.isPending) return <Spinner />;
+  if (props.isPending) products = <Spinner />;
   if (!props.error && props.products.length === 0 && !props.isPending)
-    products = <h2 className={classes.errorMessage}>No products to show</h2>;
+    products = (
+      <h2 className={classes.errorMessage}>Didn't Find Any Product</h2>
+    );
 
   if (props.products.length !== 0)
     products = (
@@ -91,9 +94,16 @@ const Products = (props) => {
         close={closeDialogHandler}
         confirm={dialogConfirmedActionHandler}
       />
-
-      <Search />
-      <div className={classes.products}>{products}</div>
+      <div className={classes.main}>
+        <Grid container justify="center">
+          <Grid item sm={4} lg={3}>
+            <Search />
+          </Grid>
+          <Grid item sm={8} lg={9}>
+            {products}
+          </Grid>
+        </Grid>
+      </div>
     </>
   );
 };
@@ -101,7 +111,6 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
   return {
     products: state.products.products,
-    productsFetched: state.products.productsFetched,
     isAuthenticated: state.auth.token !== null,
     token: state.auth.token,
     error: state.products.error,
