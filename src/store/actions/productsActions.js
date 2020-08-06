@@ -152,7 +152,6 @@ export const searchProducts = (data) => {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response.data);
           dispatch(requestProductsFailed(error.response.statusText));
         } else if (error.request) {
           dispatch(requestProductsFailed("Failed to fetch products"));

@@ -6,8 +6,8 @@ import AppBar from "./components/Navigation/Appbar";
 import Products from "./components/Products/Products";
 import Logout from "./components/Auth/Logout";
 import Auth from "./components/Auth/Auth";
-import Snackbar from "./components/UI/Snackbar";
 import EditProduct from "./components/Products/EditProduct";
+import FilterProducts from "./components/Products/FilterProducts";
 
 const App = (props) => {
   const { onReloadCheckAuthStatus } = props;
@@ -19,6 +19,7 @@ const App = (props) => {
     <>
       <Route path="/" exact component={Products} />
       <Route path="/auth" component={Auth} />
+      <Route path="/filterproducts" component={FilterProducts} />
     </>
   );
   if (props.isAuthenticated) {
@@ -28,6 +29,7 @@ const App = (props) => {
           <Route path="/" exact component={Products} />
           <Route path="/logout" component={Logout} />;
           <Route path="/auth" component={Auth} />
+          <Route path="/filterproducts" component={FilterProducts} />
           <Route path="/manageproducts" component={EditProduct} />
         </Switch>
       </>
@@ -37,7 +39,6 @@ const App = (props) => {
   return (
     <>
       <AppBar />
-      <Snackbar />
       {routes}
     </>
   );

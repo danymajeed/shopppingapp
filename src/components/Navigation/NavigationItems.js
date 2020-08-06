@@ -89,6 +89,19 @@ const NavigationItems = (props) => {
             />
           </ListItem>
         )}
+        <ListItem
+          onClick={props.close}
+          divider
+          button
+          component={Link}
+          className={classes.listItem}
+          to="/filterproducts"
+        >
+          <ListItemText
+            primary="Filter"
+            classes={{ primary: classes.itemText }}
+          />
+        </ListItem>
       </List>
     </>
   );

@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core";
 import Snackbar from "../UI/Snackbar";
 import Search from "./Search/Search";
 
-const styles = makeStyles((theme) => ({
+const styles = makeStyles(() => ({
   main: {
     marginTop: 20,
   },
@@ -27,7 +27,6 @@ const Products = (props) => {
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
 
   const { requestProducts } = props;
-  const { productsFetched } = props;
   const [open, setOpen] = useState(false);
   const [dialogPayload, setDialogPayload] = useState();
 
@@ -50,7 +49,7 @@ const Products = (props) => {
 
   useEffect(() => {
     requestProducts();
-  }, [requestProducts, productsFetched]);
+  }, [requestProducts]);
 
   const dialogConfirmedActionHandler = () => {
     props.deleteProducts(dialogPayload.payload.id, props.token);
@@ -112,9 +111,9 @@ const mapStateToProps = (state) => {
   return {
     products: state.products.products,
     isAuthenticated: state.auth.token !== null,
-    token: state.auth.token,
     error: state.products.error,
     isPending: state.products.isPending,
+    token: state.auth.token,
     deleteError: state.products.deleteError,
     deleteSuccess: state.products.deleteSuccess,
   };

@@ -17,9 +17,14 @@ const initialStateProducts = {
 const reducer = (state = initialStateProducts, action = {}) => {
   switch (action.type) {
     case actionTypes.REQUEST_PRODUCTS_PENDING:
-      return { ...state, isPending: true, productsFetched: true };
+      return { ...state, isPending: true };
     case actionTypes.REQUEST_PRODUCTS_SUCCESS:
-      return { ...state, isPending: false, products: action.products };
+      return {
+        ...state,
+        isPending: false,
+        error: false,
+        products: action.products,
+      };
     case actionTypes.REQUEST_PRODUCTS_FAILED:
       return { ...state, isPending: false, error: action.error };
     case actionTypes.DELETE_PRODUCTS_SUCCESS:

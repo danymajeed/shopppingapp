@@ -109,6 +109,8 @@ const EditProduct = (props) => {
   const [productForm, setProductForm] = useState(initialState);
   const [image, setImage] = useState();
 
+  console.log("product edit");
+
   useEffect(() => {
     if (props.location.state !== undefined) {
       const product = props.location.state.product;

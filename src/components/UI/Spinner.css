@@ -1,14 +1,14 @@
 .sk-cube-grid {
   width: 60px;
   height: 60px;
-  margin: 100px auto;
+  margin: 20px auto;
 }
-
+/* 
 .center {
   height: 87vh;
   display: grid;
   place-items: center;
-}
+} */
 
 .sk-cube-grid .sk-cube {
   width: 33%;

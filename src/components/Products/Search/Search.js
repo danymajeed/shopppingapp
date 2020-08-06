@@ -258,7 +258,6 @@ const Search = (props) => {
             onChange={priceChangeHandler}
           ></TextField>
         </Grid>
-
         {/* RAM */}
         <Grid>
           <Typography
